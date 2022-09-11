@@ -2,15 +2,14 @@ const popup = document.getElementById("popup");
 const btn = document.getElementById("btn");
 const submitbtn = document.getElementById("submitbtn");
 const readbtn = document.getElementById("readbtn");
+const checkbox = document.getElementById("isRead");
+const removebutton = document.getElementById("removebtn")
+
+btn.addEventListener("click", modalpopup);
 
 
-
-
-btn.addEventListener("click", myFunction);
-
-
-function myFunction() {
-    if (popup.style.display !== "none") {
+function modalpopup() {
+    if (popup.style.display == "block") {
         popup.style.display = "none";
         btn.value = "Add New Book!";
     } else {
@@ -32,19 +31,24 @@ const createBookCard = (book) => {
 
     bookCard.classList.add("book-card");
     buttonsgr.classList.add("buttons-group");
+
     isRead1.setAttribute("id","readbtn");
-
-
+    remove.setAttribute("id","removebtn" );
+    isRead1.classList.add("readbtn")
 
     title.textContent = `Title:"${book.titulli}"`
     author.textContent = `Author:${book.autori}`
     pages.textContent = `Pages:${book.faqet}`
 
-
-
     remove.innerHTML = "remove";
-    isRead1.innerHTML = "read";
 
+    if (book.lexuar==true) {
+        isRead1.style.backgroundColor="green"
+        isRead1.textContent="Read"
+    } else {
+        isRead1.style.backgroundColor="red"
+        isRead1.textContent="Not Read"
+    }
 
     grid.appendChild(bookCard);
     bookCard.appendChild(title);
@@ -56,6 +60,7 @@ const createBookCard = (book) => {
 
 }
 
+
 let myLibrary = []
 
 function liber (titulli, autori, faqet, lexuar){
@@ -65,7 +70,22 @@ function liber (titulli, autori, faqet, lexuar){
     this.lexuar = lexuar;
 }
 
+
+function updateGrid(){
+    const booklist = Array.from(document.getElementsByClassName('book-card'));
+    booklist.forEach(liberi => {
+        liberi.remove();
+    });
+
+    for (let index = 0; index < myLibrary.length; index++) {
+        createBookCard(myLibrary[index])
+    }
+}
+
 function addbook (ev){
+    if (document.getElementById('title').value=="" || document.getElementById('author').value==""||document.getElementById('pages').value=="") {
+        alert("Cannot add empty books!")
+    } else {
     ev.preventDefault()
     let libri = {
         titulli: document.getElementById('title').value,
@@ -75,16 +95,10 @@ function addbook (ev){
     }
     myLibrary.push(libri);
     document.forms[0].reset();
-
-    const booklist = Array.from(document.getElementsByClassName('book-card'));
-    booklist.forEach(liberi => {
-        liberi.remove();
-    });
-
-    for (let index = 0; index < myLibrary.length; index++) {
-        createBookCard(myLibrary[index])
+    updateGrid();
+    popup.style.display = "none";
+    btn.value = "Add New Book!";
     }
-
 }
 
 document.addEventListener('DOMContentLoaded', ()=>(
