@@ -5,9 +5,8 @@ const readbtn = document.getElementById("readbtn");
 const checkbox = document.getElementById("isRead");
 const removebutton = document.getElementById("removebtn")
 
+
 btn.addEventListener("click", modalpopup);
-
-
 function modalpopup() {
     if (popup.style.display == "block") {
         popup.style.display = "none";
@@ -17,6 +16,18 @@ function modalpopup() {
         btn.value = "Collapse the pop-up!";
     }
 }
+
+
+let myLibrary = []
+
+
+function liber (titulli, autori, faqet, lexuar){
+    this.titulli = titulli;
+    this.autori = autori;
+    this.faqet = faqet;
+    this.lexuar = lexuar;
+}
+
 
 const createBookCard = (book) => {
     let grid = document.getElementById("grid");
@@ -28,6 +39,7 @@ const createBookCard = (book) => {
     let isRead1 = document.createElement('button');
     let remove = document.createElement('button');
 
+    remove.value = `${book.titulli}`
 
     bookCard.classList.add("book-card");
     buttonsgr.classList.add("buttons-group");
@@ -57,30 +69,9 @@ const createBookCard = (book) => {
     bookCard.appendChild(buttonsgr);
     buttonsgr.appendChild(isRead1);
     buttonsgr.appendChild(remove);
-
 }
 
 
-let myLibrary = []
-
-function liber (titulli, autori, faqet, lexuar){
-    this.titulli = titulli;
-    this.autori = autori;
-    this.faqet = faqet;
-    this.lexuar = lexuar;
-}
-
-
-function updateGrid(){
-    const booklist = Array.from(document.getElementsByClassName('book-card'));
-    booklist.forEach(liberi => {
-        liberi.remove();
-    });
-
-    for (let index = 0; index < myLibrary.length; index++) {
-        createBookCard(myLibrary[index])
-    }
-}
 
 function addbook (ev){
     if (document.getElementById('title').value=="" || document.getElementById('author').value==""||document.getElementById('pages').value=="") {
@@ -98,6 +89,17 @@ function addbook (ev){
     updateGrid();
     popup.style.display = "none";
     btn.value = "Add New Book!";
+    }
+}
+
+function updateGrid(){
+    const booklist = Array.from(document.getElementsByClassName('book-card'));
+    booklist.forEach(liberi => {
+        liberi.remove();
+    });
+
+    for (let index = 0; index < myLibrary.length; index++) {
+        createBookCard(myLibrary[index])
     }
 }
 
