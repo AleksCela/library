@@ -4,6 +4,15 @@ const submitbtn = document.getElementById("submitbtn");
 const readbtn = document.getElementById("readbtn");
 const checkbox = document.getElementById("isRead");
 const removebutton = document.getElementById("removebtn")
+const closebtn = document.getElementById("svg")
+
+
+
+closebtn.addEventListener("click", closemodalpopup);
+function closemodalpopup() {
+    popup.style.display = "none";
+    btn.value = "Add New Book!";
+}
 
 
 btn.addEventListener("click", modalpopup);
@@ -127,6 +136,9 @@ function removeBook(event){
         }
     }
 }
+
+
+
 
 document.addEventListener('DOMContentLoaded', ()=>(
     document.getElementById('submitbtn').addEventListener('click',addbook)

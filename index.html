@@ -10,9 +10,10 @@
 <body>
     <header>
         <div class="row1">
-            <h1 class="title">Library</h1>
+            <h1 class="title">The Library</h1>
+            <h3 class="expression">"hominem unius libri timeo"</h3>
             <div class="addbookbtn" id="myBtn">
-                <input type="button" value="Add New Book!"  id="btn" />
+                <input type="button" value="Add New Book!" class="btn" id="btn" />
             </div>
         </div>
     </header>
@@ -25,6 +26,9 @@
     </main>
     <div class="popup" id="popup">
         <form class="add-book-form">
+            <svg id="svg" style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
             <h3>Add new book</h3>
             <input type="text" placeholder="Title" class="input" access="false" id="title" required="">
             <input class="input" type="text" id="author" placeholder="Author" required="" maxlength="100">
