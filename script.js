@@ -115,30 +115,51 @@ function updateGrid(){
 }
 
 
-document.addEventListener( "click", removeBook );
+document.addEventListener( "click", removebookIsread );
 
-function removeBook(event){
+function removebookIsread(event){
     var element = event.target;
-    for (let i = 0; i < myLibrary.length; i++) {
-        const titleofbook = myLibrary[i].titulli;
-        if(element.tagName == 'BUTTON' && element.value == titleofbook && element.innerHTML == "Remove"){
-            myLibrary.splice(i,1);
-            updateGrid();
-        }
-        if(element.tagName == 'BUTTON' && element.value == titleofbook && element.classList.contains("readbtn")){
-            if (myLibrary[i].lexuar == true) {
-                myLibrary[i].lexuar = false
-                updateGrid()
-            }else {
-                myLibrary[i].lexuar = true
-                updateGrid()
+    // for (let i = 0; i < myLibrary.length; i++) {
+    //     const titleofbook = myLibrary[i].titulli;
+    //     if(element.tagName == 'BUTTON' && element.value == titleofbook && element.innerHTML == "Remove"){
+    //         myLibrary.splice(i,1);
+    //         updateGrid();
+    //     }
+    //     if(element.tagName == 'BUTTON' && element.value == titleofbook && element.classList.contains("readbtn")){
+    //         if (myLibrary[i].lexuar == true) {
+    //             myLibrary[i].lexuar = false
+    //             updateGrid()
+    //         }else {
+    //             myLibrary[i].lexuar = true
+    //             updateGrid()
+    //         }
+    //     }
+    // }
+    if(element.tagName == 'BUTTON'  && element.innerHTML == "Remove"){
+        for (let i = 0; i < myLibrary.length; i++) {
+            const titleofbook = myLibrary[i].titulli;
+            if (element.value == titleofbook) {
+                myLibrary.splice(i,1);
+                updateGrid();
             }
         }
     }
+
+    if(element.tagName == 'BUTTON' && element.classList.contains("readbtn")){
+        for (let i = 0; i < myLibrary.length; i++){ 
+            const titleofbook = myLibrary[i].titulli;
+            if (element.value == titleofbook) {
+                if (myLibrary[i].lexuar == true) {
+                    myLibrary[i].lexuar = false
+                    updateGrid()
+                }else {
+                    myLibrary[i].lexuar = true
+                    updateGrid()
+                }
+            }
+        }   
+    }
 }
-
-
-
 
 document.addEventListener('DOMContentLoaded', ()=>(
     document.getElementById('submitbtn').addEventListener('click',addbook)

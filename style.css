@@ -168,7 +168,9 @@ body {
   background-color: #ffdeda;
   outline: 0;
 }
-
+h4,p{
+    font-family: 'Dancing Script';
+}
 @media (max-width: 768px) {
     .btn {
     padding: 0 40px;
