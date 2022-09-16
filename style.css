@@ -34,8 +34,6 @@ html, body {
 }
 
 
-
-
 /* The popup form*/
 
 
@@ -145,29 +143,8 @@ body {
   text-align: center;
   text-decoration: none;
   user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 }
 
-.btn:after {
-  background-color: #111;
-  border-radius: 8px;
-  content: "";
-  display: block;
-  height: 48px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  top: -2px;
-  transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
-  z-index: -1;
-}
-
-.btn:active {
-  background-color: #ffdeda;
-  outline: 0;
-}
 h4,p{
     font-family: 'Dancing Script';
 }
