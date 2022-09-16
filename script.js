@@ -40,7 +40,7 @@ const createBookCard = (book) => {
     let remove = document.createElement('button');
 
     remove.value = `${book.titulli}`
-
+    isRead1.value = `${book.titulli}`
     bookCard.classList.add("book-card");
     buttonsgr.classList.add("buttons-group");
 
@@ -52,12 +52,12 @@ const createBookCard = (book) => {
     author.textContent = `Author:${book.autori}`
     pages.textContent = `Pages:${book.faqet}`
 
-    remove.innerHTML = "remove";
+    remove.innerHTML = "Remove";
 
-    if (book.lexuar==true) {
+    if (book.lexuar) {
         isRead1.style.backgroundColor="green"
         isRead1.textContent="Read"
-    } else {
+    } else if (book.lexuar==false) {
         isRead1.style.backgroundColor="red"
         isRead1.textContent="Not Read"
     }
@@ -75,7 +75,9 @@ const createBookCard = (book) => {
 
 function addbook (ev){
     if (document.getElementById('title').value=="" || document.getElementById('author').value==""||document.getElementById('pages').value=="") {
+        ev.preventDefault()
         alert("Cannot add empty books!")
+
     } else {
     ev.preventDefault()
     let libri = {
@@ -100,6 +102,29 @@ function updateGrid(){
 
     for (let index = 0; index < myLibrary.length; index++) {
         createBookCard(myLibrary[index])
+    }
+}
+
+
+document.addEventListener( "click", removeBook );
+
+function removeBook(event){
+    var element = event.target;
+    for (let i = 0; i < myLibrary.length; i++) {
+        const titleofbook = myLibrary[i].titulli;
+        if(element.tagName == 'BUTTON' && element.value == titleofbook && element.innerHTML == "Remove"){
+            myLibrary.splice(i,1);
+            updateGrid();
+        }
+        if(element.tagName == 'BUTTON' && element.value == titleofbook && element.classList.contains("readbtn")){
+            if (myLibrary[i].lexuar == true) {
+                myLibrary[i].lexuar = false
+                updateGrid()
+            }else {
+                myLibrary[i].lexuar = true
+                updateGrid()
+            }
+        }
     }
 }
 
